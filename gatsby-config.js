@@ -36,8 +36,8 @@ if (!spaceId || !accessToken) {
 
 module.exports = {
   siteMetadata: {
-    title: "Algolia Contentful Demo",
-    description: "Official Algolia Contentful demo blog",
+    title: "Deven Goratela Blog",
+    description: "Blog on random topic by Deven Goratela",
   },
   plugins: [
     "gatsby-transformer-remark",

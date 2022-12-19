@@ -1,14 +1,17 @@
 {
-  "name": "Algolia Contentful Demo Blog",
-  "description": "Algolia demo blog built on Gatsby",
+  "name": "Deven Goratela Blog",
+  "description": "Blog on random topic by Deven Goratela",
   "keywords": [
     "contentful",
     "gatsby",
     "algolia",
     "static",
-    "ssg"
+    "ssg",
+    "deven",
+    "goratela",
+    "deven goratela"
   ],
-  "repository": "https://github.com/kxu-algolia/contentful-blog-demo",
+  "repository": "https://github.com/devenkhatri/devengoratela.com_blog",
   "success_url": "/",
   "buildpacks": [
     {

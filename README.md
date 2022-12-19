@@ -17,7 +17,7 @@
 ### Get the source code and install dependencies.
 
 ```
-$ git clone https://github.com/kxu-algolia/contentful-blog-demo
+$ git clone https://github.com/devenkhatri/devengoratela.com_blog
 $ npm install
 ```
 

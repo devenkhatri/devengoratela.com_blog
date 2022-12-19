@@ -9,7 +9,7 @@ const Navigation = () => (
   <nav role="navigation" className={styles.container} aria-label="Main">
     <Link to="/" className={styles.logoLink}>
       <span className={styles.logo} />
-      <span className={styles.navigationItem}>Algolia Blog (Contentful)</span>
+      <span className={styles.navigationItem}>Deven Goratela's Blog</span>
     </Link>
     <ul className={styles.navigation}>
       <Search indices={searchIndices} />
