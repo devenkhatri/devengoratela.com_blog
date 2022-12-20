@@ -63,7 +63,7 @@ export default function Layout(props) {
             </IonToolbar>
           </IonFooter>
         </IonContent>
-        <IonTabBar slot="bottom">
+        {/* <IonTabBar slot="bottom">
           <IonTabButton tab="home" href="/">
             <IonIcon icon={home} />
             <IonLabel>Home</IonLabel>
@@ -72,7 +72,7 @@ export default function Layout(props) {
             <IonIcon icon={list} />
             <IonLabel>Blog</IonLabel>
           </IonTabButton>
-        </IonTabBar>
+        </IonTabBar> */}
       </IonPage>
     </IonApp>
   );
