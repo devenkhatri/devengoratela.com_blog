@@ -41,7 +41,7 @@ export default function Layout(props) {
             </IonButtons>
             <IonButtons slot="end">
               <IonButton onClick={toggleDarkModeHandler}>
-                <IonIcon slot="icon-only" icon={!darkMode?moonOutline:sunnyOutline}></IonIcon>
+                <IonIcon slot="icon-only" icon={!darkMode ? moonOutline : sunnyOutline}></IonIcon>
               </IonButton>
             </IonButtons>
           </IonToolbar>
@@ -51,28 +51,16 @@ export default function Layout(props) {
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
           <main className={styles.main}>{props.children}</main>
-          <IonFooter>
-            <IonToolbar>
-              <IonTitle>
-                © {new Date().getFullYear()}, Built with
-                {` `}
-                <a href="https://www.gatsbyjs.org">Gatsby</a>
-                {` | `}
-                <Link to="/demo">Demo</Link>
-              </IonTitle>
-            </IonToolbar>
-          </IonFooter>
         </IonContent>
-        {/* <IonTabBar slot="bottom">
-          <IonTabButton tab="home" href="/">
-            <IonIcon icon={home} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="blog" href="/demo/">
-            <IonIcon icon={list} />
-            <IonLabel>Blog</IonLabel>
-          </IonTabButton>
-        </IonTabBar> */}
+        <IonFooter>
+          <IonToolbar>
+            <IonTitle>
+              © {new Date().getFullYear()}, Built with Gatsby+Ionic+Contentful
+              {` | `}
+              <Link to="/demo">Demo</Link>
+            </IonTitle>
+          </IonToolbar>
+        </IonFooter>
       </IonPage>
     </IonApp>
   );
