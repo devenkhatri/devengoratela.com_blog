@@ -2,6 +2,8 @@
   The Random Topics Blog from Deven Goratela
 </h1>
 
+Build Status
+[![Netlify Status](https://api.netlify.com/api/v1/badges/146eaa7b-4074-43a4-ad7e-2029937fe6f8/deploy-status)](https://app.netlify.com/sites/devengoratelablog/deploys)
 <!-- [View the Demo][demo] -->
 
 <!-- [demo]: https://landingpagestarter.gatsbyjs.com/ -->
