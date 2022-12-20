@@ -6,7 +6,7 @@ import * as cssVars from "gatsby-theme-landing-page/src/styles/variables.module.
 import * as styles from "./layout.module.css";
 import { home, list, moonOutline, sunnyOutline } from "ionicons/icons";
 
-import { IonApp, IonPage, IonContent, IonFooter, IonToolbar, IonTitle, IonHeader, IonLabel, IonIcon, IonRefresher, IonRefresherContent, IonButtons, IonMenuButton, IonButton, IonTabBar, IonTabButton } from '@ionic/react'
+import { IonApp, IonPage, IonContent, IonFooter, IonToolbar, IonTitle, IonHeader, IonIcon, IonRefresher, IonRefresherContent, IonButtons, IonMenuButton, IonButton, IonMenu, IonItem} from '@ionic/react'
 import { refreshPage } from "../utils";
 
 export default function Layout(props) {
@@ -29,11 +29,22 @@ export default function Layout(props) {
 
   return (
     <IonApp>
-      <IonPage className={[cssVars.root, styles.root].join(" ")}>
+      <IonMenu type="push" contentId="main-content">
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>Site Menu</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <IonItem icon={home} href={'/'} detail={false}>Home</IonItem>
+          <IonItem icon={list} href={'/demo'} detail={false}>Blog</IonItem>
+        </IonContent>
+      </IonMenu>
+      <IonPage id="main-content" className={[cssVars.root, styles.root].join(" ")}>
         <IonHeader translucent={true} className={styles.header}>
           <Head {...props} />
           <IonToolbar color={'primary'}>
-            <IonTitle size={'small'}>
+            <IonTitle>
               <Link to="/">{props.title || data.site.siteMetadata.title}</Link>
             </IonTitle>
             <IonButtons slot="start">
