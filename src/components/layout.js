@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import { Head } from "gatsby-theme-landing-page";
-import "../ionictheme.css";
 import * as cssVars from "gatsby-theme-landing-page/src/styles/variables.module.css";
 import * as styles from "./layout.module.css";
-import { home, list, moonOutline, sunnyOutline } from "ionicons/icons";
+import { moonOutline, sunnyOutline } from "ionicons/icons";
 
-import { IonApp, IonPage, IonContent, IonFooter, IonToolbar, IonTitle, IonHeader, IonIcon, IonRefresher, IonRefresherContent, IonButtons, IonMenuButton, IonButton, IonMenu, IonItem} from '@ionic/react'
+import { IonApp, IonPage, IonContent, IonFooter, IonToolbar, IonTitle, IonHeader, IonIcon, IonRefresher, IonRefresherContent, IonButtons, IonMenuButton, IonButton} from '@ionic/react'
 import { refreshPage } from "../utils";
+import Menu from "./Menu";
 
 export default function Layout(props) {
   const data = useStaticQuery(graphql`
@@ -29,17 +29,7 @@ export default function Layout(props) {
 
   return (
     <IonApp>
-      <IonMenu type="push" contentId="main-content">
-        <IonHeader>
-          <IonToolbar>
-            <IonTitle>Site Menu</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonContent>
-          <IonItem icon={home} href={'/'} detail={false}>Home</IonItem>
-          <IonItem icon={list} href={'/demo'} detail={false}>Blog</IonItem>
-        </IonContent>
-      </IonMenu>
+      <Menu />
       <IonPage id="main-content" className={[cssVars.root, styles.root].join(" ")}>
         <IonHeader translucent={true} className={styles.header}>
           <Head {...props} />
@@ -66,7 +56,7 @@ export default function Layout(props) {
         <IonFooter>
           <IonToolbar>
             <IonTitle>
-              © {new Date().getFullYear()}, Built with Gatsby+Ionic+Contentful
+              © {new Date().getFullYear()}
               {` | `}
               <Link to="/demo">Demo</Link>
             </IonTitle>

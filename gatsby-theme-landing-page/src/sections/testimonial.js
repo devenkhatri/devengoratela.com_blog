@@ -14,7 +14,7 @@ export default function Testimonial({ heading, secondaryHeading, content }) {
       </Heading>
       <div className={styles.content}>
         {content.map((item) => (
-          <TestimonialContent {...item} />
+          <TestimonialContent key={item.id} {...item} />
         ))}
       </div>
     </Section>

@@ -1,0 +1,7 @@
+{
+  "name": "devengoratela-com-blog",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

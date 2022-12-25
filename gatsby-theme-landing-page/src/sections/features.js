@@ -17,6 +17,7 @@ export default function Features({ heading, secondaryHeading, content }) {
       <div className={styles.content}>
         {content.map((item, i) => (
           <Feature
+            key={i}
             {...item}
             orientation={i % 2 === 0 ? "default" : "reverse"}
           />
