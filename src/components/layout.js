@@ -30,7 +30,7 @@ export default function Layout(props) {
   return (
     <IonApp>
       <Menu />
-      <IonPage id="main-content" className={[cssVars.root, styles.root].join(" ")}>
+      <IonPage id="main-content">
         <IonHeader translucent={true} className={styles.header}>
           <Head {...props} />
           <IonToolbar color={'primary'}>
