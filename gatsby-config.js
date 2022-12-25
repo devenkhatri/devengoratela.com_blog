@@ -25,8 +25,8 @@ if (!spaceId || !accessToken) {
 module.exports = {
   siteMetadata: {
     title: "Deven Goratela",
-    description:
-      "The Random Topics Blog",
+    description: "The Random Topics Blog",
+    author: "Deven Goratela <deven.khatri@gmail.com>"
   },
   plugins: [
     {
