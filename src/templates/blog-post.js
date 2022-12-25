@@ -16,9 +16,7 @@ const BlogPostTemplate = (props) => {
     const post = get(props, 'data.contentfulBlogPost')
     const previous = get(props, 'data.previous')
     const next = get(props, 'data.next')
-    const plainTextDescription = post.description.description //documentToPlainTextString(
-        //JSON.parse(post.description.description)
-    //)
+    const plainTextDescription = post.description?.description
     const plainTextBody = documentToPlainTextString(JSON.parse(post.body.raw))
     const readingResult = readingTime(plainTextBody, 10)
 
