@@ -26,7 +26,7 @@ module.exports = {
   siteMetadata: {
     title: "Deven Goratela",
     description: "The Random Topics Blog",
-    author: "Deven Goratela <deven.khatri@gmail.com>"
+    author: "Deven Goratela"
   },
   plugins: [
     {

@@ -1,41 +1,27 @@
 import React from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import get from 'lodash/get'
 
 import Layout from '../components/layout'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import { renderRichText } from 'gatsby-source-contentful/rich-text'
-import Tags from '../components/tags'
-// import Hero from '../components/hero'
-// import ArticlePreview from '../components/article-preview'
+import Post from '../components/post'
+import { IonCol, IonGrid, IonRow } from '@ionic/react'
 
 class RootIndex extends React.Component {
   render() {
     const posts = get(this, 'props.data.allContentfulBlogPost.nodes')
-
     return (
       <Layout>
-        <ul>
-        {posts.map((post) => {
-          return (
-            <li key={post.slug}>
-              <Link to={`/blog/${post.slug}`}>
-                <GatsbyImage alt="" image={post.heroImage?.gatsbyImage} />
-                <h2>{post.title}</h2>
-              </Link>
-              <div>
-                <small className="meta">{post.publishDate}</small>
-              </div>
-              <div>
-                {post.description?.description}
-              </div>
-              <div>                
-                <Tags tags={post.tags} />
-              </div>
-            </li>
-          )
-        })}
-      </ul>
+        <IonGrid>
+          <IonRow>
+            {posts.map((post) => {
+              return (
+                <IonCol size='12' sizeMd='6' sizeLg='4'>
+                  <Post key={post.slug} post={post} />
+                </IonCol>
+              )
+            })}
+          </IonRow>
+        </IonGrid>
       </Layout>
     )
   }
@@ -45,7 +31,7 @@ export default RootIndex
 
 export const pageQuery = graphql`
   query HomeQuery {
-    allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
+    allContentfulBlogPost(sort: {publishDate: DESC}) {
       nodes {
         title
         slug

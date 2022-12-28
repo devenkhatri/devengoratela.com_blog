@@ -19,7 +19,7 @@ export default function SuperHero({ heading, secondaryHeading, content }) {
         <Heading as="h2" secondary>
           {secondaryHeading}
         </Heading>
-        {content.map((item) => (
+        {content && content.map((item) => (
           <Content key={item.id} {...item} />
         ))}
       </Container>

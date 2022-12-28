@@ -5,7 +5,7 @@ import * as cssVars from "gatsby-theme-landing-page/src/styles/variables.module.
 import * as styles from "./layout.module.css";
 import { moonOutline, sunnyOutline } from "ionicons/icons";
 
-import { IonApp, IonPage, IonContent, IonFooter, IonToolbar, IonTitle, IonHeader, IonIcon, IonRefresher, IonRefresherContent, IonButtons, IonMenuButton, IonButton} from '@ionic/react'
+import { IonApp, IonPage, IonContent, IonFooter, IonToolbar, IonTitle, IonHeader, IonIcon, IonRefresher, IonRefresherContent, IonButtons, IonMenuButton, IonButton } from '@ionic/react'
 import { refreshPage } from "../utils";
 import Menu from "./Menu";
 
@@ -15,6 +15,8 @@ export default function Layout(props) {
       site {
         siteMetadata {
           title
+          description
+          author
         }
       }
     }
@@ -52,16 +54,16 @@ export default function Layout(props) {
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
           <main className={styles.main}>{props.children}</main>
+          <IonFooter>
+            <IonToolbar>
+              <IonTitle>
+                © {data.site.siteMetadata.author}, {new Date().getFullYear()}
+                {` | `}
+                {data.site.siteMetadata.description}
+              </IonTitle>
+            </IonToolbar>
+          </IonFooter>
         </IonContent>
-        <IonFooter>
-          <IonToolbar>
-            <IonTitle>
-              © {new Date().getFullYear()}
-              {` | `}
-              <Link to="/demo">Demo</Link>
-            </IonTitle>
-          </IonToolbar>
-        </IonFooter>
       </IonPage>
     </IonApp>
   );
