@@ -15,8 +15,8 @@ class RootIndex extends React.Component {
           <IonRow>
             {posts.map((post) => {
               return (
-                <IonCol size='12' sizeMd='6' sizeLg='4'>
-                  <Post key={post.slug} post={post} />
+                <IonCol key={post.slug}  size='12' sizeMd='6' sizeLg='4'>
+                  <Post post={post} />
                 </IonCol>
               )
             })}

@@ -3,13 +3,13 @@ import { Link } from "gatsby";
 import React from "react";
 import Tags from "./tags";
 import _ from "lodash";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 
 const Post = ({ post }) => {
-
+    const tagsJoin = _.join(post.tags, ',')
     return (
         <IonCard>
-            {!post?.heroImage?.gatsbyImage && <img alt="Silhouette of mountains" height={'100%'} src="https://ionicframework.com/docs/img/demos/card-media.png" /> }
+            {!post?.heroImage?.gatsbyImage && <StaticImage alt="Silhouette of mountains" src={`https://source.unsplash.com/random/?${tagsJoin}`} /> }
             {post?.heroImage?.gatsbyImage && <GatsbyImage alt={post.title} image={post?.heroImage?.gatsbyImage} /> }
             <IonCardHeader>
                 <IonCardTitle>
