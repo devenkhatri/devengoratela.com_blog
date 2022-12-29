@@ -17,7 +17,7 @@ const { spaceId, accessToken } = contentfulConfig;
 if (!spaceId || !accessToken) {
   throw new Error(
     "Contentful spaceId and the access token need to be provided. Received: " +
-      JSON.stringify(contentfulConfig)
+    JSON.stringify(contentfulConfig)
   );
 }
 
@@ -32,6 +32,14 @@ module.exports = {
     {
       resolve: `gatsby-theme-landing-page`,
       options: contentfulConfig,
+    },
+    {
+      resolve: 'gatsby-source-blogger',
+      options: {
+        apiKey: process.env.GATSBY_BLOGGER_APIKEY,
+        blogId: process.env.GATSBY_BLOGGER_BLOGID,
+        downloadImage: true
+      }
     },
     {
       resolve: `gatsby-plugin-manifest`,

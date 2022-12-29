@@ -11,8 +11,9 @@ import Seo from '../components/seo'
 import Layout from '../components/layout'
 import Tags from '../components/tags'
 import * as styles from './blog-post.module.css'
+import { IonContent } from '@ionic/react'
 
-const BlogPostTemplate = (props) => {
+const PostTemplate = (props) => {
     const post = get(props, 'data.contentfulBlogPost')
     const previous = get(props, 'data.previous')
     const next = get(props, 'data.next')
@@ -49,7 +50,7 @@ const BlogPostTemplate = (props) => {
                 title={post.title}
                 content={post.description}
             /> */}
-            <div className={styles.container}>
+            <IonContent fullscreen={true} className="ion-padding">
                 <span>
                     Author: {post.author?.name} &middot;{' '}
                     <time dateTime={post.rawDate}>{post.publishDate}</time> –{' '}
@@ -65,14 +66,14 @@ const BlogPostTemplate = (props) => {
                             <ul className={styles.articleNavigation}>
                                 {previous && (
                                     <li>
-                                        <Link to={`/blog/${previous.slug}`} rel="prev">
+                                        <Link to={`/post/${previous.slug}`} rel="prev">
                                             ← {previous.title}
                                         </Link>
                                     </li>
                                 )}
                                 {next && (
                                     <li>
-                                        <Link to={`/blog/${next.slug}`} rel="next">
+                                        <Link to={`/post/${next.slug}`} rel="next">
                                             {next.title} →
                                         </Link>
                                     </li>
@@ -81,15 +82,15 @@ const BlogPostTemplate = (props) => {
                         </nav>
                     )}
                 </div>
-            </div>
+            </IonContent>
         </Layout>
     )
 }
 
-export default BlogPostTemplate
+export default PostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug(
+  query PostBySlug(
     $slug: String!
     $previousPostSlug: String
     $nextPostSlug: String

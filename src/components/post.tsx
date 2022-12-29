@@ -7,10 +7,16 @@ import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 
 const Post = ({ post }) => {
     const tagsJoin = _.join(post.tags, ',')
+    const randomImageByTags = `https://source.unsplash.com/random/?${tagsJoin}`;
+    // console.log("**** randomImageByTags", randomImageByTags)
+    const excerpt = _.truncate(post.excerpt, {
+        'length': 75,
+        'separator': ' '
+    });
     return (
         <IonCard>
-            {!post?.heroImage?.gatsbyImage && <StaticImage alt="Silhouette of mountains" src={`https://source.unsplash.com/random/?${tagsJoin}`} /> }
-            {post?.heroImage?.gatsbyImage && <GatsbyImage alt={post.title} image={post?.heroImage?.gatsbyImage} /> }
+            {!post.image && randomImageByTags && <StaticImage alt="Silhouette of mountains" src={randomImageByTags} /> }
+            {post.image && <GatsbyImage alt={post.title} image={post.image} />}
             <IonCardHeader>
                 <IonCardTitle>
                     <Link to={`/blog/${post.slug}`}>
@@ -21,10 +27,7 @@ const Post = ({ post }) => {
             </IonCardHeader>
 
             <IonCardContent>
-                {_.truncate(post.description?.description, {
-                    'length': 75,
-                    'separator': ' '
-                })}
+                <div dangerouslySetInnerHTML={{ __html: excerpt }} />
             </IonCardContent>
             <Tags tags={post.tags} />
         </IonCard>

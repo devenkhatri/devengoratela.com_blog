@@ -41,13 +41,20 @@ exports.createSchemaCustomization = ({ actions }) => {
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  // Define a template for blog post
-  const blogPost = path.resolve('./src/templates/blog-post.js')
+  // Define a template for blog and post
+  const blogTemplate = path.resolve('./src/templates/blogTemplate.js')
+  const postTemplate = path.resolve('./src/templates/postTemplate.js')
 
   const result = await graphql(
     `
       {
         allContentfulBlogPost {
+          nodes {
+            title
+            slug
+          }
+        }
+        allBloggerPost {
           nodes {
             title
             slug
@@ -66,11 +73,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   const posts = result.data.allContentfulBlogPost.nodes
+  const blogs = result.data.allBloggerPost.nodes
 
-  // Create blog posts pages
-  // But only if there's at least one blog post found in Contentful
+  // Create blog(blogger) and posts(contentful) pages
+  // But only if there's at least one blog post found in Contentful or blogger
   // `context` is available in the template as a prop and as a variable in GraphQL
-
   if (posts.length > 0) {
     posts.forEach((post, index) => {
       const previousPostSlug = index === 0 ? null : posts[index - 1].slug
@@ -78,10 +85,27 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         index === posts.length - 1 ? null : posts[index + 1].slug
 
       createPage({
-        path: `/blog/${post.slug}/`,
-        component: blogPost,
+        path: `/post/${post.slug}/`,
+        component: postTemplate,
         context: {
           slug: post.slug,
+          previousPostSlug,
+          nextPostSlug,
+        },
+      })
+    })
+  }
+  if (blogs.length > 0) {
+    blogs.forEach((blog, index) => {
+      const previousPostSlug = index === 0 ? null : blogs[index - 1].slug
+      const nextPostSlug =
+        index === blogs.length - 1 ? null : blogs[index + 1].slug
+
+      createPage({
+        path: `/blog/${blog.slug}/`,
+        component: blogTemplate,
+        context: {
+          slug: blog.slug,
           previousPostSlug,
           nextPostSlug,
         },

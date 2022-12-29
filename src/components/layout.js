@@ -43,6 +43,7 @@ export default function Layout(props) {
               <IonMenuButton></IonMenuButton>
             </IonButtons>
             <IonButtons slot="end">
+              {props.extraEndButtons && props.extraEndButtons()}
               <IonButton onClick={toggleDarkModeHandler}>
                 <IonIcon slot="icon-only" icon={!darkMode ? moonOutline : sunnyOutline}></IonIcon>
               </IonButton>
@@ -54,7 +55,7 @@ export default function Layout(props) {
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
           <main className={styles.main}>{props.children}</main>
-          <IonFooter>
+          <IonFooter translucent={true}>
             <IonToolbar>
               <IonTitle>
                 © {data.site.siteMetadata.author}, {new Date().getFullYear()}
