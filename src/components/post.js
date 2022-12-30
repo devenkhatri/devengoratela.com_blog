@@ -8,6 +8,8 @@ import * as styles from "./post.module.css";
 
 const Post = ({ post }) => {
     const tagsJoin = _.join(post.tags, ',')
+    //https://awik.io/generate-random-images-unsplash-without-using-api/
+    //https://source.unsplash.com/random/900×700/?fruit
     const randomImageByTags = `https://source.unsplash.com/random/?${tagsJoin}`;
     // console.log("**** randomImageByTags", randomImageByTags)
     const excerpt = _.truncate(post.excerpt, {
@@ -16,7 +18,7 @@ const Post = ({ post }) => {
     });
     return (
         <IonCard>
-            {!post.image && <img alt="Placehold Image" src={`https://via.placeholder.com/424x212.png?text=${post.title}`} /> }
+            {!post.image && <img alt="Placehold Image" src={`https://via.placeholder.com/424x212.png?text=${post.title}`} className={styles.cardImageTop} /> }
             {post.image && <GatsbyImage alt={post.title} image={post.image} className={styles.cardImageTop} />}
             <IonCardHeader>
                 <IonCardTitle>

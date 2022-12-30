@@ -7,7 +7,8 @@ import Seo from '../components/seo'
 import Layout from '../components/layout'
 import Tags from '../components/tags'
 import * as styles from './blog-post.module.css'
-import { IonContent } from '@ionic/react'
+import Moment from 'react-moment';
+import { IonItem, IonLabel } from '@ionic/react'
 
 const BlogTemplate = (props) => {
     const blog = get(props, 'data.bloggerPost')
@@ -16,28 +17,25 @@ const BlogTemplate = (props) => {
     const blogBody = blog.content
     const readingResult = readingTime(blogBody, 10)
 
-    //https://awik.io/generate-random-images-unsplash-without-using-api/
-    //https://source.unsplash.com/random/900×700/?fruit
-
     return (
         <Layout title={blog.title}>
             <Seo
                 title={blog.title}
                 description={blogBody}
-                // image={`http:${post.heroImage?.resize.src}`}
+            // image={`http:${post.heroImage?.resize.src}`}
             />
             {/* <Hero
                 image={post.heroImage?.gatsbyImage}
                 title={post.title}
                 content={post.description}
             /> */}
-            <IonContent fullscreen={true} className="ion-padding">
-                <span>
-                    <time dateTime={blog.published}>{blog.published}</time> –{' '}
-                    {readingResult && readingResult.text}
-                </span>
-                <div>
-                    <div dangerouslySetInnerHTML={{__html: blogBody}} />
+            <div className="ion-padding">
+                <IonItem>
+                    <IonLabel><p>{readingResult && readingResult.text}</p></IonLabel>
+                    <IonLabel slot='end'><p><Moment fromNow>{blog.published}</Moment></p></IonLabel>
+                </IonItem>
+                <div className={styles.article}>
+                    <div dangerouslySetInnerHTML={{ __html: blogBody }} />
                     <Tags tags={blog.labels} />
                     {(previous || next) && (
                         <nav>
@@ -60,7 +58,7 @@ const BlogTemplate = (props) => {
                         </nav>
                     )}
                 </div>
-            </IonContent>
+            </div>
         </Layout>
     )
 }

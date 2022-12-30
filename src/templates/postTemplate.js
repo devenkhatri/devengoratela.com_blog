@@ -11,7 +11,6 @@ import Seo from '../components/seo'
 import Layout from '../components/layout'
 import Tags from '../components/tags'
 import * as styles from './blog-post.module.css'
-import { IonContent } from '@ionic/react'
 
 const PostTemplate = (props) => {
     const post = get(props, 'data.contentfulBlogPost')
@@ -50,7 +49,7 @@ const PostTemplate = (props) => {
                 title={post.title}
                 content={post.description}
             /> */}
-            <IonContent fullscreen={true} className="ion-padding">
+            <div fullscreen={true} className="ion-padding">
                 <span>
                     Author: {post.author?.name} &middot;{' '}
                     <time dateTime={post.rawDate}>{post.publishDate}</time> –{' '}
@@ -82,7 +81,7 @@ const PostTemplate = (props) => {
                         </nav>
                     )}
                 </div>
-            </IonContent>
+            </div>
         </Layout>
     )
 }

@@ -16,7 +16,7 @@ const RootIndex = ({ data }) => {
   const scrollSize = 18;
   const [currentPage, setCurrentPage] = useState(1);
   const [, updateState] = React.useState();
-  const forceUpdate = React.useCallback(() => updateState({}), []);  
+  const forceUpdate = React.useCallback(() => updateState({}), []);
 
   useEffect(() => {
     doResuffle();
@@ -24,9 +24,10 @@ const RootIndex = ({ data }) => {
 
   useEffect(() => {
     generateItems();
-  },[allBlogPosts])
+    console.log("****** generateItems()")
+  }, [allBlogPosts, currentPage])
 
-  const doResuffle = () => {    
+  const doResuffle = () => {
     let localPosts = [];
     localPosts = _.union(localPosts, _.map(posts, (post) => ({
       title: post.title,
@@ -48,22 +49,25 @@ const RootIndex = ({ data }) => {
       tags: blog.labels
     }
     )))
-    setAllBlogPosts(_.shuffle(localPosts))        
+    setAllBlogPosts(_.shuffle(localPosts))
   }
   const generateItems = () => {
-      let newPageLength = Object.keys(items).length + (scrollSize * currentPage);
-      setItems(_.slice(allBlogPosts, 0, newPageLength));
-      forceUpdate(); //this is used to force the state update after setting items
+    let newPageLength = Object.keys(items).length + (scrollSize * currentPage);
+    console.log("****** currentPage", currentPage)
+    console.log("****** newPageLength", newPageLength)
+    setItems(_.slice(allBlogPosts, 0, newPageLength));
+    forceUpdate(); //this is used to force the state update after setting items
   };
+  console.log("****** items.length", items.length)
 
   const extraEndButtons = () => (
-    <IonButton onClick={()=>setCurrentPage(1)}>
+    <IonButton onClick={() => { doResuffle(); setItems([]); setCurrentPage(1); }}>
       <IonIcon slot="icon-only" icon={shuffle}></IonIcon>
     </IonButton>
   )
 
   return (
-    <Layout extraEndButtons={extraEndButtons}>      
+    <Layout extraEndButtons={extraEndButtons}>
       <IonGrid>
         <IonRow>
           {items.map((post) => {
@@ -74,14 +78,14 @@ const RootIndex = ({ data }) => {
             )
           })}
           <IonInfiniteScroll
-              onIonInfinite={(ev) => {
-                setCurrentPage(currentPage + 1);
-                generateItems();
-                setTimeout(() => ev.target.complete(), 500);
-              }}
-            >
-              <IonInfiniteScrollContent loadingText="Loading data..." loadingSpinner="bubbles"></IonInfiniteScrollContent>
-            </IonInfiniteScroll>
+            onIonInfinite={(ev) => {
+              setCurrentPage(currentPage + 1);
+              generateItems();
+              setTimeout(() => ev.target.complete(), 500);
+            }}
+          >
+            <IonInfiniteScrollContent loadingText="Loading data..." loadingSpinner="bubbles"></IonInfiniteScrollContent>
+          </IonInfiniteScroll>
         </IonRow>
       </IonGrid>
     </Layout>

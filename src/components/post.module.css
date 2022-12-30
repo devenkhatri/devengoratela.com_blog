@@ -1,3 +1,9 @@
+/* iOS places the subtitle above the title */
+ion-card-header.ios {
+  display: flex;
+  flex-flow: column-reverse;
+}
+
 .cardImageTop {
   width: 100%;
   height: 15vw;
