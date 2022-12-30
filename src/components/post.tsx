@@ -15,7 +15,7 @@ const Post = ({ post }) => {
     });
     return (
         <IonCard>
-            {!post.image && randomImageByTags && <StaticImage alt="Silhouette of mountains" src={randomImageByTags} /> }
+            {!post.image && <img alt="Placehold Image" src={`https://via.placeholder.com/424x212.png?text=${post.title}`} /> }
             {post.image && <GatsbyImage alt={post.title} image={post.image} />}
             <IonCardHeader>
                 <IonCardTitle>
