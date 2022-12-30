@@ -3,7 +3,8 @@ import { Link } from "gatsby";
 import React from "react";
 import Tags from "./tags";
 import _ from "lodash";
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image";
+import * as styles from "./post.module.css";
 
 const Post = ({ post }) => {
     const tagsJoin = _.join(post.tags, ',')
@@ -16,7 +17,7 @@ const Post = ({ post }) => {
     return (
         <IonCard>
             {!post.image && <img alt="Placehold Image" src={`https://via.placeholder.com/424x212.png?text=${post.title}`} /> }
-            {post.image && <GatsbyImage alt={post.title} image={post.image} />}
+            {post.image && <GatsbyImage alt={post.title} image={post.image} className={styles.cardImageTop} />}
             <IonCardHeader>
                 <IonCardTitle>
                     <Link to={`/blog/${post.slug}`}>
