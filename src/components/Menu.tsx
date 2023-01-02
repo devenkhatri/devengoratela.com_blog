@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from '@reach/router';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, homeOutline, homeSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -26,52 +26,52 @@ const appPages: AppPage[] = [
   {
     title: 'Home',
     url: '/',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp
+    iosIcon: homeOutline,
+    mdIcon: homeSharp
   },
+  // {
+  //   title: 'Demo-1',
+  //   url: '/demo/',
+  //   iosIcon: paperPlaneOutline,
+  //   mdIcon: paperPlaneSharp
+  // },
+  // {
+  //   title: 'Demo-2',
+  //   url: '/home/',
+  //   iosIcon: heartOutline,
+  //   mdIcon: heartSharp
+  // },
   {
-    title: 'Demo-1',
-    url: '/demo/',
-    iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp
-  },
-  {
-    title: 'Demo-2',
-    url: '/home/',
-    iosIcon: heartOutline,
-    mdIcon: heartSharp
-  },
-  {
-    title: 'Archived',
-    url: '/page/Archived/',
+    title: 'Blog Archive',
+    url: '/archives/',
     iosIcon: archiveOutline,
     mdIcon: archiveSharp
   },
-  {
-    title: 'Trash',
-    url: '/page/Trash/',
-    iosIcon: trashOutline,
-    mdIcon: trashSharp
-  },
-  {
-    title: 'Spam',
-    url: '/page/Spam/',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp
-  }
+  // {
+  //   title: 'Trash',
+  //   url: '/page/Trash/',
+  //   iosIcon: trashOutline,
+  //   mdIcon: trashSharp
+  // },
+  // {
+  //   title: 'Spam',
+  //   url: '/page/Spam/',
+  //   iosIcon: warningOutline,
+  //   mdIcon: warningSharp
+  // }
 ];
 
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+// const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
-const Menu: React.FC = () => {
+const Menu: React.FC = ({ labels }: any) => {
   const isBrowser = typeof window !== "undefined"
-  const location = isBrowser?useLocation():{pathname:""};
+  const location = isBrowser ? useLocation() : { pathname: "" };
   return (
     <IonMenu contentId="main-content" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          <IonListHeader>The Randome Topic Blog</IonListHeader>
+          <IonNote>hi@devengoratela.com</IonNote>
           {isBrowser && appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
@@ -84,15 +84,17 @@ const Menu: React.FC = () => {
           })}
         </IonList>
 
-        <IonList id="labels-list">
-          <IonListHeader>Labels</IonListHeader>
-          {labels.map((label, index) => (
-            <IonItem lines="none" key={index}>
-              <IonIcon slot="start" icon={bookmarkOutline} />
-              <IonLabel>{label}</IonLabel>
-            </IonItem>
-          ))}
-        </IonList>
+        {labels &&
+          <IonList id="labels-list">
+            <IonListHeader>Tags</IonListHeader>
+            {labels.map((label, index) => (
+              <IonItem lines="none" key={index}>
+                <IonIcon slot="start" icon={bookmarkOutline} />
+                <IonLabel>{label}</IonLabel>
+              </IonItem>
+            ))}
+          </IonList>
+        }
       </IonContent>
     </IonMenu>
   );

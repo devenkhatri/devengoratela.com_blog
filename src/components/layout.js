@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import { Head } from "gatsby-theme-landing-page";
-import * as cssVars from "gatsby-theme-landing-page/src/styles/variables.module.css";
 import * as styles from "./layout.module.css";
 import { moonOutline, sunnyOutline } from "ionicons/icons";
 
@@ -31,7 +30,7 @@ export default function Layout(props) {
 
   return (
     <IonApp>
-      <Menu />
+      <Menu labels={props.allLabels} />
       <IonPage id="main-content">
         <IonHeader translucent={true} className={styles.header}>
           <Head {...props} />
