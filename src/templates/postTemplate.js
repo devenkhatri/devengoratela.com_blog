@@ -1,24 +1,22 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import get from 'lodash/get'
 import { renderRichText } from 'gatsby-source-contentful/rich-text'
-import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { readingTime } from 'reading-time-estimator'
 
 import Seo from '../components/seo'
 import Layout from '../components/layout'
 import Tags from '../components/tags'
-import * as styles from './blog-post.module.css'
+import './blog-post.module.css'
+import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonLabel, IonNote } from '@ionic/react'
+import { arrowBack, arrowForward, videocam } from 'ionicons/icons'
 
 const PostTemplate = (props) => {
     const post = get(props, 'data.contentfulBlogPost')
     const previous = get(props, 'data.previous')
     const next = get(props, 'data.next')
     const plainTextDescription = post.description?.description
-    const plainTextBody = documentToPlainTextString(JSON.parse(post.body.raw))
-    const readingResult = readingTime(plainTextBody, 10)
 
     //https://awik.io/generate-random-images-unsplash-without-using-api/
     //https://source.unsplash.com/random/900×700/?fruit
@@ -38,50 +36,45 @@ const PostTemplate = (props) => {
     };
 
     return (
-        <Layout title={post.title}>
+        <Layout>
             <Seo
                 title={post.title}
                 description={plainTextDescription}
-                image={`http:${post.heroImage?.resize.src}`}
+                image={post.image}
             />
-            {/* <Hero
-                image={post.heroImage?.gatsbyImage}
-                title={post.title}
-                content={post.description}
-            /> */}
-            <div fullscreen={true} className="ion-padding">
-                <span>
-                    Author: {post.author?.name} &middot;{' '}
-                    <time dateTime={post.rawDate}>{post.publishDate}</time> –{' '}
-                    {readingResult && readingResult.text}
-                </span>
-                <div className={styles.article}>
-                    <div className={styles.body}>
-                        {post.body?.raw && renderRichText(post.body, options)}
-                    </div>
-                    <Tags tags={post.tags} />
-                    {(previous || next) && (
-                        <nav>
-                            <ul className={styles.articleNavigation}>
-                                {previous && (
-                                    <li>
-                                        <Link to={`/post/${previous.slug}`} rel="prev">
-                                            ← {previous.title}
-                                        </Link>
-                                    </li>
-                                )}
-                                {next && (
-                                    <li>
-                                        <Link to={`/post/${next.slug}`} rel="next">
-                                            {next.title} →
-                                        </Link>
-                                    </li>
-                                )}
-                            </ul>
-                        </nav>
+            <IonCard>
+                <IonCardHeader>
+                    <IonCardTitle color={'primary'}>{post.title}</IonCardTitle>
+                    <IonCardSubtitle>{post.publishDate}</IonCardSubtitle>                    
+                </IonCardHeader>
+                <IonCardContent>
+                    {post.body?.raw && renderRichText(post.body, options)}
+                    {post.youtubeUrl && <IonNote>
+                        <IonButton href={post.youtubeUrl} fill='clear' target='_blank' color={'danger'}>
+                            <IonIcon icon={videocam} slot="end" />
+                            <IonLabel>Youtube video of this Blog</IonLabel>
+                        </IonButton>
+                    </IonNote>
+                    }
+                </IonCardContent>
+            </IonCard>
+            <Tags tags={post.tags} />
+            {(previous || next) && (
+                <IonItem>
+                    {previous && (
+                        <IonButton slot='start' href={`/post/${previous.slug}`} fill='clear'>
+                            <IonIcon icon={arrowBack} slot="start" />
+                            <IonLabel>{previous.title}</IonLabel>
+                        </IonButton>
                     )}
-                </div>
-            </div>
+                    {next && (
+                        <IonButton slot='end' href={`/post/${next.slug}`} fill='clear'>
+                            <IonIcon icon={arrowForward} slot="end" />
+                            <IonLabel>{next.title}</IonLabel>
+                        </IonButton>
+                    )}
+                </IonItem>
+            )}
         </Layout>
     )
 }
@@ -115,6 +108,7 @@ export const pageQuery = graphql`
       description {
         description
       }
+      youtubeUrl
     }
     previous: contentfulBlogPost(slug: { eq: $previousPostSlug }) {
       slug

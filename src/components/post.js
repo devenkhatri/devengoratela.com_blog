@@ -39,9 +39,10 @@ const Post = ({ post }) => {
                     <IonButton color={'success'}>
                         <IonIcon slot="icon-only" icon={volumeMedium}></IonIcon>
                     </IonButton>
-                    <IonButton color={'danger'}>
+                    {post.youtubeUrl && <IonButton color={'danger'} href={post.youtubeUrl}>
                         <IonIcon slot="icon-only" icon={videocam}></IonIcon>
                     </IonButton>
+                    }
                 </IonButtons>
             </IonItem>
         </IonCard>

@@ -49,6 +49,7 @@ export const pageQuery = graphql`
         description {
           description
         }
+        youtubeUrl
       }
     }        
   }

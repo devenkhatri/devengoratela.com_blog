@@ -53,7 +53,7 @@ export default function Layout(props) {
           <IonRefresher slot="fixed" onIonRefresh={refreshPage}>
             <IonRefresherContent></IonRefresherContent>
           </IonRefresher>
-          <main className={styles.main}>{props.children}</main>
+          <main>{props.children}</main>
           <IonFooter translucent={true}>
             <IonToolbar>
               <IonTitle>

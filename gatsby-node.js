@@ -48,13 +48,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       {
-        allContentfulBlogPost {
+        allContentfulBlogPost(sort: {publishDate: DESC}) {
           nodes {
             title
             slug
           }
         }
-        allBloggerPost {
+        allBloggerPost(sort: {published: DESC}) {
           nodes {
             title
             slug
