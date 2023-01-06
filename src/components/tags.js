@@ -1,17 +1,13 @@
-import { IonBadge, IonCol, IonGrid, IonRow } from '@ionic/react'
+import { IonBadge } from '@ionic/react'
 import React from 'react'
 
 const Tags = ({ tags }) =>
-  <IonGrid>
-    <IonRow>
+  <div>
       {tags && tags.map((tag) => (
-        <IonCol>
-          <IonBadge key={tag} color={'secondary'}>
+          <IonBadge key={tag} color={'secondary'} style={{marginRight: '0.25rem', padding: '0.4rem'}}>
             {tag}
           </IonBadge>
-        </IonCol>
       ))}
-    </IonRow>
-  </IonGrid>
+  </div>
 
 export default Tags

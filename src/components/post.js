@@ -5,7 +5,9 @@ import Tags from "./tags";
 import _ from "lodash";
 import { GatsbyImage } from "gatsby-plugin-image";
 import * as styles from "./post.module.css";
-import { videocam, volumeMedium } from "ionicons/icons";
+import { shareSocialOutline, videocam } from "ionicons/icons";
+import { TextToSpeech } from "tts-react";
+import { RWebShare } from "react-web-share";
 
 const Post = ({ post }) => {
     // const tagsJoin = _.join(post.tags, ',')
@@ -13,10 +15,10 @@ const Post = ({ post }) => {
     //https://source.unsplash.com/random/900×700/?fruit
     // const randomImageByTags = `https://source.unsplash.com/random/?${tagsJoin}`;
     // console.log("**** randomImageByTags", randomImageByTags)
-    const excerpt = _.truncate(post.excerpt, {
-        'length': 75,
-        'separator': ' '
-    });
+    // const excerpt = _.truncate(post.excerpt, {
+    //     'length': 200,
+    //     'separator': ' '
+    // });
     return (
         <IonCard>
             {!post.image && <img alt="Placehold Image" src={`https://via.placeholder.com/424x212.png?text=${post.title}`} className={styles.cardImageTop} />}
@@ -31,14 +33,33 @@ const Post = ({ post }) => {
             </IonCardHeader>
 
             <IonCardContent>
-                <div dangerouslySetInnerHTML={{ __html: excerpt }} />
+                <TextToSpeech
+                    allowMuting
+                    align="vertical"
+                    markTextAsSpoken
+                    rate={1}
+                    size="medium"
+                    position="topRight"
+                    volume={1}
+                >
+                    {post.excerpt}
+                    {/* <span display="none">{excerpt}</span> */}
+                </TextToSpeech>
             </IonCardContent>
             <IonItem>
                 <Tags tags={post.tags} />
                 <IonButtons slot="end">
-                    <IonButton color={'success'}>
-                        <IonIcon slot="icon-only" icon={volumeMedium}></IonIcon>
-                    </IonButton>
+                    <RWebShare
+                        data={{
+                            text: post.title,
+                            url: `https://www.devengoratela.com/${post.type}/${post.slug}`,
+                            title: "Share Post",
+                        }}
+                    >
+                        <IonButton color={'success'}>
+                            <IonIcon slot="icon-only" icon={shareSocialOutline}></IonIcon>
+                        </IonButton>
+                    </RWebShare>
                     {post.youtubeUrl && <IonButton color={'danger'} href={post.youtubeUrl}>
                         <IonIcon slot="icon-only" icon={videocam}></IonIcon>
                     </IonButton>

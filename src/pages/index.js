@@ -1,19 +1,20 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import _ from 'lodash'
-import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer'
 import BlogListing from '../components/blog-listing'
 
 const RootIndex = ({ data }) => {
   const posts = data.allContentfulBlogPost.nodes
+  
   const allBlogPosts = _.map(posts, (post) => ({
     title: post.title,
     slug: post.slug,
     type: 'post',
     bodyRichText: post.body?.raw,
-    excerpt: post.body?.raw && documentToPlainTextString(JSON.parse(post.body?.raw)),
+    excerpt: post.description?.description,
     publishDate: post.publishDate,
     image: post.heroImage?.gatsbyImage,
+    youtubeUrl: post.youtubeUrl,
     tags: post.tags
   }))
   

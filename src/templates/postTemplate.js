@@ -10,7 +10,8 @@ import Layout from '../components/layout'
 import Tags from '../components/tags'
 import './blog-post.module.css'
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonLabel, IonNote } from '@ionic/react'
-import { arrowBack, arrowForward, videocam } from 'ionicons/icons'
+import { arrowBack, arrowForward, shareSocialOutline, videocam } from 'ionicons/icons'
+import { RWebShare } from 'react-web-share'
 
 const PostTemplate = (props) => {
     const post = get(props, 'data.contentfulBlogPost')
@@ -35,8 +36,22 @@ const PostTemplate = (props) => {
         },
     };
 
+    const extraEndButtons = () => (
+        <RWebShare
+            data={{
+                text: post.title,
+                url: `https://www.devengoratela.com/${post.type}/${post.slug}`,
+                title: "Share Post",
+            }}
+        >
+            <IonButton fill='clear' size={'small'}>
+                <IonIcon slot="icon-only" icon={shareSocialOutline}></IonIcon>
+            </IonButton>
+        </RWebShare>
+    )
+
     return (
-        <Layout>
+        <Layout extraEndButtons={extraEndButtons}>
             <Seo
                 title={post.title}
                 description={plainTextDescription}
@@ -45,7 +60,7 @@ const PostTemplate = (props) => {
             <IonCard>
                 <IonCardHeader>
                     <IonCardTitle color={'primary'}>{post.title}</IonCardTitle>
-                    <IonCardSubtitle>{post.publishDate}</IonCardSubtitle>                    
+                    <IonCardSubtitle>{post.publishDate}</IonCardSubtitle>
                 </IonCardHeader>
                 <IonCardContent>
                     {post.body?.raw && renderRichText(post.body, options)}
@@ -56,9 +71,9 @@ const PostTemplate = (props) => {
                         </IonButton>
                     </IonNote>
                     }
+                    <Tags tags={post.tags} />
                 </IonCardContent>
             </IonCard>
-            <Tags tags={post.tags} />
             {(previous || next) && (
                 <IonItem>
                     {previous && (

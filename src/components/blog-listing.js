@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import _ from 'lodash'
 import Layout from '../components/layout'
 import Post from '../components/post'
-import { IonCol, IonGrid, IonInfiniteScroll, IonInfiniteScrollContent, IonRow } from '@ionic/react'
+import { IonButton, IonCol, IonGrid, IonIcon, IonInfiniteScroll, IonInfiniteScrollContent, IonRow } from '@ionic/react'
+import { RWebShare } from 'react-web-share'
+import { shareSocialOutline } from 'ionicons/icons'
 
 const BlogListing = ({allBlogPosts}) => {
   
@@ -23,9 +25,23 @@ const BlogListing = ({allBlogPosts}) => {
     };
 
     const allLabels = _.uniq(_.flatten(_.map(allBlogPosts, post => post.tags || [])))
+
+    const extraEndButtons = () => (
+      <RWebShare
+          data={{
+              text: "Deven Goratela Random Topic's Blog",
+              url: `https://www.devengoratela.com/`,
+              title: "Share Site",
+          }}
+      >
+          <IonButton fill='clear' size={'small'}>
+              <IonIcon slot="icon-only" icon={shareSocialOutline}></IonIcon>
+          </IonButton>
+      </RWebShare>
+  )
   
     return (
-      <Layout allLabels={allLabels}>
+      <Layout allLabels={allLabels} extraEndButtons={extraEndButtons}>
         <IonGrid>
           <IonRow>
             {items.map((post) => {
