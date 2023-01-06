@@ -1,4 +1,4 @@
-import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonButtons, IonButton, IonIcon } from "@ionic/react";
+import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonItem, IonButtons, IonButton, IonIcon, IonRow, IonCol } from "@ionic/react";
 import { Link } from "gatsby";
 import React from "react";
 import Tags from "./tags";
@@ -21,51 +21,58 @@ const Post = ({ post }) => {
     // });
     return (
         <IonCard>
-            {!post.image && <img alt="Placehold Image" src={`https://via.placeholder.com/424x212.png?text=${post.title}`} className={styles.cardImageTop} />}
-            {post.image && <GatsbyImage alt={post.title} image={post.image} className={styles.cardImageTop} />}
-            <IonCardHeader>
-                <IonCardTitle>
-                    <Link to={`/${post.type}/${post.slug}`}>
-                        {post.title}
-                    </Link>
-                </IonCardTitle>
-                <IonCardSubtitle>{post.publishDate}</IonCardSubtitle>
-            </IonCardHeader>
+            <IonRow>
+                <IonCol size='12' sizeLg='3'>
+                    {!post.image && <img alt="Placehold Image" src={`https://via.placeholder.com/424x212.png?text=${post.title}`} className={styles.cardImageTop} />}
+                    {post.image && <GatsbyImage alt={post.title} image={post.image} className={styles.cardImageTop} />}
+                </IonCol>
+                <IonCol>
+                    <IonCardHeader>
+                        <IonCardTitle>
+                            <Link to={`/${post.type}/${post.slug}`}>
+                                {post.title}
+                            </Link>
+                        </IonCardTitle>
+                        <IonCardSubtitle>{post.publishDate}</IonCardSubtitle>
+                    </IonCardHeader>
+                    <IonCardContent>
+                        <TextToSpeech
+                            allowMuting
+                            align="vertical"
+                            markTextAsSpoken
+                            rate={1}
+                            size="medium"
+                            position="topRight"
+                            volume={1}
+                        >
+                            {post.excerpt}
+                            {/* <span display="none">{excerpt}</span> */}
+                        </TextToSpeech>
+                    </IonCardContent>
+                    <IonItem lines="none">
+                        <Tags tags={post.tags} />
+                        <IonButtons slot="end">
+                            <RWebShare
+                                data={{
+                                    text: post.title,
+                                    url: `https://www.devengoratela.com/${post.type}/${post.slug}`,
+                                    title: "Share Post",
+                                }}
+                            >
+                                <IonButton color={'success'}>
+                                    <IonIcon slot="icon-only" icon={shareSocialOutline}></IonIcon>
+                                </IonButton>
+                            </RWebShare>
+                            {post.youtubeUrl && <IonButton color={'danger'} href={post.youtubeUrl}>
+                                <IonIcon slot="icon-only" icon={videocam}></IonIcon>
+                            </IonButton>
+                            }
+                        </IonButtons>
+                    </IonItem>
+                </IonCol>
+            </IonRow>
 
-            <IonCardContent>
-                <TextToSpeech
-                    allowMuting
-                    align="vertical"
-                    markTextAsSpoken
-                    rate={1}
-                    size="medium"
-                    position="topRight"
-                    volume={1}
-                >
-                    {post.excerpt}
-                    {/* <span display="none">{excerpt}</span> */}
-                </TextToSpeech>
-            </IonCardContent>
-            <IonItem>
-                <Tags tags={post.tags} />
-                <IonButtons slot="end">
-                    <RWebShare
-                        data={{
-                            text: post.title,
-                            url: `https://www.devengoratela.com/${post.type}/${post.slug}`,
-                            title: "Share Post",
-                        }}
-                    >
-                        <IonButton color={'success'}>
-                            <IonIcon slot="icon-only" icon={shareSocialOutline}></IonIcon>
-                        </IonButton>
-                    </RWebShare>
-                    {post.youtubeUrl && <IonButton color={'danger'} href={post.youtubeUrl}>
-                        <IonIcon slot="icon-only" icon={videocam}></IonIcon>
-                    </IonButton>
-                    }
-                </IonButtons>
-            </IonItem>
+
         </IonCard>
     );
 }

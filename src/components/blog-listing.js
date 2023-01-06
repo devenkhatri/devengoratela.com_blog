@@ -46,7 +46,7 @@ const BlogListing = ({allBlogPosts}) => {
           <IonRow>
             {items.map((post) => {
               return (
-                <IonCol key={post.slug} size='12' sizeMd='6' sizeLg='4'>
+                <IonCol key={post.slug} size='12'>
                   <Post post={post} />
                 </IonCol>
               )
