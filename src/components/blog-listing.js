@@ -58,7 +58,7 @@ const BlogListing = ({allBlogPosts}) => {
                 setTimeout(() => ev.target.complete(), 500);
               }}
             >
-              <IonInfiniteScrollContent loadingText="Loading data..." loadingSpinner="bubbles"></IonInfiniteScrollContent>
+              <IonInfiniteScrollContent></IonInfiniteScrollContent>
             </IonInfiniteScroll>
           </IonRow>
         </IonGrid>
