@@ -33,14 +33,14 @@ module.exports = {
       resolve: `gatsby-theme-landing-page`,
       options: contentfulConfig,
     },
-    {
-      resolve: 'gatsby-source-blogger',
-      options: {
-        apiKey: process.env.GATSBY_BLOGGER_APIKEY,
-        blogId: process.env.GATSBY_BLOGGER_BLOGID,
-        downloadImage: true
-      }
-    },
+    // {
+    //   resolve: 'gatsby-source-blogger',
+    //   options: {
+    //     apiKey: process.env.GATSBY_BLOGGER_APIKEY,
+    //     blogId: process.env.GATSBY_BLOGGER_BLOGID,
+    //     downloadImage: true
+    //   }
+    // },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

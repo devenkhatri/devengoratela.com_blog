@@ -42,7 +42,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   // Define a template for blog and post
-  const blogTemplate = path.resolve('./src/templates/blogTemplate.js')
   const postTemplate = path.resolve('./src/templates/postTemplate.js')
 
   const result = await graphql(
@@ -53,13 +52,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             title
             slug
           }
-        }
-        allBloggerPost(sort: {published: DESC}) {
-          nodes {
-            title
-            slug
-          }
-        }
+        }        
       }
     `
   )
@@ -73,7 +66,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 
   const posts = result.data.allContentfulBlogPost.nodes
-  const blogs = result.data.allBloggerPost.nodes
 
   // Create blog(blogger) and posts(contentful) pages
   // But only if there's at least one blog post found in Contentful or blogger
@@ -95,21 +87,21 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     })
   }
-  if (blogs.length > 0) {
-    blogs.forEach((blog, index) => {
-      const previousPostSlug = index === 0 ? null : blogs[index - 1].slug
-      const nextPostSlug =
-        index === blogs.length - 1 ? null : blogs[index + 1].slug
+  // if (blogs.length > 0) {
+  //   blogs.forEach((blog, index) => {
+  //     const previousPostSlug = index === 0 ? null : blogs[index - 1].slug
+  //     const nextPostSlug =
+  //       index === blogs.length - 1 ? null : blogs[index + 1].slug
 
-      createPage({
-        path: `/blog/${blog.slug}/`,
-        component: blogTemplate,
-        context: {
-          slug: blog.slug,
-          previousPostSlug,
-          nextPostSlug,
-        },
-      })
-    })
-  }
+  //     createPage({
+  //       path: `/blog/${blog.slug}/`,
+  //       component: blogTemplate,
+  //       context: {
+  //         slug: blog.slug,
+  //         previousPostSlug,
+  //         nextPostSlug,
+  //       },
+  //     })
+  //   })
+  // }
 }

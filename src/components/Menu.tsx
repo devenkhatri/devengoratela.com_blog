@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from '@reach/router';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, homeOutline, homeSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, homeOutline, homeSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, videocam, videocamOffOutline, warningOutline, warningSharp } from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -20,6 +20,7 @@ interface AppPage {
   iosIcon: string;
   mdIcon: string;
   title: string;
+  target?: string;
 }
 
 const appPages: AppPage[] = [
@@ -43,10 +44,18 @@ const appPages: AppPage[] = [
   // },
   {
     title: 'Blog Archive',
-    url: '/archives/',
+    url: 'https://devengoratela.blogspot.com/',
     iosIcon: archiveOutline,
-    mdIcon: archiveSharp
+    mdIcon: archiveSharp,
+    target: '_blank'
   },
+  {
+    title: 'Youtube Channel',
+    url: 'https://www.youtube.com/playlist?list=PLzl--ASgM3jOLJL9A61LN1JLzjRsq53Y0',
+    iosIcon: videocamOffOutline,
+    mdIcon: videocam,
+    target: '_blank'
+  },  
   // {
   //   title: 'Trash',
   //   url: '/page/Trash/',
@@ -67,7 +76,7 @@ const Menu: React.FC = ({ labels }: any) => {
   const isBrowser = typeof window !== "undefined"
   const location = isBrowser ? useLocation() : { pathname: "" };
   return (
-    <IonMenu contentId="main-content" type="overlay">
+    <IonMenu contentId="main-content" type="reveal">
       <IonContent>
         <IonList id="inbox-list">
           <IonListHeader>The Randome Topic Blog</IonListHeader>
@@ -75,7 +84,7 @@ const Menu: React.FC = ({ labels }: any) => {
           {isBrowser && appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} href={appPage.url} routerDirection="none" lines="none" detail={false}>
+                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} href={appPage.url} target={appPage.target} routerDirection="none" lines="none" detail={false}>
                   <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
                   <IonLabel>{appPage.title}</IonLabel>
                 </IonItem>
