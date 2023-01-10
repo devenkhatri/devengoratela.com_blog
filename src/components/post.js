@@ -8,6 +8,7 @@ import * as styles from "./post.module.css";
 import { shareSocialOutline, videocam } from "ionicons/icons";
 import { TextToSpeech } from "tts-react";
 import { RWebShare } from "react-web-share";
+import ReactPlayer from "react-player";
 
 const Post = ({ post }) => {
     // const tagsJoin = _.join(post.tags, ',')
@@ -19,12 +20,14 @@ const Post = ({ post }) => {
     //     'length': 200,
     //     'separator': ' '
     // });
+
     return (
         <IonCard>
             <IonRow>
                 <IonCol size='12' sizeLg='3'>
-                    {!post.image && <img alt="Placehold Image" src={`https://via.placeholder.com/424x212.png?text=${post.title}`} className={styles.cardImageTop} />}
-                    {post.image && <GatsbyImage alt={post.title} image={post.image} className={styles.cardImageTop} />}
+                    {!post.youtubeUrl && !post.image && <img alt="Placehold Image" src={`https://via.placeholder.com/424x212.png?text=${post.title}`} className={styles.cardImageTop} />}
+                    {!post.youtubeUrl && post.image && <GatsbyImage alt={post.title} image={post.image} className={styles.cardImageTop} />}
+                    {post.youtubeUrl && <ReactPlayer url={post.youtubeUrl} width="100%" height="100%" />}
                 </IonCol>
                 <IonCol>
                     <IonCardHeader>
@@ -46,8 +49,8 @@ const Post = ({ post }) => {
                             volume={1}
                         >
                             {post.excerpt}
-                            {/* <span display="none">{excerpt}</span> */}
                         </TextToSpeech>
+                        {/* <span display="none">{excerpt}</span> */}
                     </IonCardContent>
                     <IonItem lines="none">
                         <Tags tags={post.tags} />

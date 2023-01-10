@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from '@reach/router';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, homeOutline, homeSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, videocam, videocamOffOutline, warningOutline, warningSharp } from 'ionicons/icons';
+import { archiveOutline, archiveSharp, bookmarkOutline, homeOutline, homeSharp, videocam, videocamOutline } from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -52,7 +52,7 @@ const appPages: AppPage[] = [
   {
     title: 'Youtube Channel',
     url: 'https://www.youtube.com/playlist?list=PLzl--ASgM3jOLJL9A61LN1JLzjRsq53Y0',
-    iosIcon: videocamOffOutline,
+    iosIcon: videocamOutline,
     mdIcon: videocam,
     target: '_blank'
   },  
