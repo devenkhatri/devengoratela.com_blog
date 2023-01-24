@@ -7,6 +7,7 @@ import { moonOutline, sunnyOutline } from "ionicons/icons";
 import { IonApp, IonPage, IonContent, IonFooter, IonToolbar, IonTitle, IonHeader, IonIcon, IonRefresher, IonRefresherContent, IonButtons, IonMenuButton, IonButton } from '@ionic/react'
 import { refreshPage } from "../utils";
 import Menu from "./Menu";
+import { Helmet } from "react-helmet";
 
 export default function Layout(props) {
   const data = useStaticQuery(graphql`
@@ -30,6 +31,10 @@ export default function Layout(props) {
 
   return (
     <IonApp>
+      <Helmet>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2576290690063012"
+          crossorigin="anonymous"></script>
+      </Helmet>
       <Menu labels={props.allLabels} />
       <IonPage id="main-content">
         <IonHeader translucent={true} className={styles.header}>
