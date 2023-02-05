@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from '@reach/router';
-import { archiveOutline, archiveSharp, bookmarkOutline, homeOutline, homeSharp, videocam, videocamOutline } from 'ionicons/icons';
+import { archiveOutline, archiveSharp, bookmarkOutline,heartOutline, heartSharp, homeOutline, homeSharp, videocam, videocamOutline } from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -36,12 +36,12 @@ const appPages: AppPage[] = [
   //   iosIcon: paperPlaneOutline,
   //   mdIcon: paperPlaneSharp
   // },
-  // {
-  //   title: 'Demo-2',
-  //   url: '/home/',
-  //   iosIcon: heartOutline,
-  //   mdIcon: heartSharp
-  // },
+   {
+     title: 'Buy me a coffee',
+     url: 'https://buy.stripe.com/4gw6rJ6xw1nkfbq7ss',
+     iosIcon: heartOutline,
+     mdIcon: heartSharp
+   },
   {
     title: 'Blog Archive',
     url: 'https://devengoratela.blogspot.com/',
