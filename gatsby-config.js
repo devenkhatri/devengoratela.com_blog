@@ -64,6 +64,7 @@ module.exports = {
       options: {
         name: `Deven Goratela`,
         short_name: `Deven Goratela`,
+        description: `A Random Topics Blog`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#000`,
