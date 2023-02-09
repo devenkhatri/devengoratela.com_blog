@@ -76,6 +76,7 @@ module.exports = {
       resolve: `gatsby-plugin-offline`,
       options: {
         precachePages: [`/`, `/post/*`],
+        globPatterns: ['**/src/assets/favicon*']
       },
     },
   ],
