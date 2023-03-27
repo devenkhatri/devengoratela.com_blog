@@ -10,6 +10,11 @@ export default function LandingPage(props) {
 
   return (
     <Layout {...props.data.page}>
+      <Seo
+        title={props.data.page.title}
+        description={props.data.page.description}
+        image={props.data.page.image}
+      />
       <Page>
         {sections.map((section) => {
           const Component = Components[section.component] || DevDebug;
