@@ -25,7 +25,10 @@ const RootIndex = ({ data }) => {
   // )
 
   return (
-    <BlogListing allBlogPosts={allBlogPosts} />
+    <>
+      <SEO />
+      <BlogListing allBlogPosts={allBlogPosts} />
+    </>    
   )
 }
 
