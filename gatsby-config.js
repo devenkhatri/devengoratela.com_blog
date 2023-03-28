@@ -28,6 +28,7 @@ module.exports = {
     description: "The Random Topics Blog",
     author: "Deven Goratela",
     image: `/icons/icon-512x512.png`,
+    siteUrl: `https://www.devengoratela.com`,
   },
   plugins: [
     {
@@ -60,6 +61,7 @@ module.exports = {
         },
       },
     },
+    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
