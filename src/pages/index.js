@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import _ from 'lodash'
 import BlogListing from '../components/blog-listing'
+import SEO from '../components/seo'
 
 const RootIndex = ({ data }) => {
   const posts = data.allContentfulBlogPost.nodes
