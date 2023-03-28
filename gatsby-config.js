@@ -26,7 +26,8 @@ module.exports = {
   siteMetadata: {
     title: "Deven Goratela",
     description: "The Random Topics Blog",
-    author: "Deven Goratela"
+    author: "Deven Goratela",
+    image: `/icons/icon-512x512.png`,
   },
   plugins: [
     {
