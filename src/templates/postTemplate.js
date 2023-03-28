@@ -5,13 +5,13 @@ import { renderRichText } from 'gatsby-source-contentful/rich-text'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
-import Seo from '../components/seo'
 import Layout from '../components/layout'
 import Tags from '../components/tags'
 import './blog-post.module.css'
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonLabel, IonNote } from '@ionic/react'
 import { arrowBack, arrowForward, shareSocialOutline, videocam } from 'ionicons/icons'
 import { RWebShare } from 'react-web-share'
+import SEO from '../components/seo'
 
 const PostTemplate = (props) => {
     const post = get(props, 'data.contentfulBlogPost')
@@ -52,7 +52,7 @@ const PostTemplate = (props) => {
 
     return (
         <Layout extraEndButtons={extraEndButtons}>
-            <Seo
+            <SEO
                 title={post.title}
                 description={plainTextDescription}
                 image={post.image}
