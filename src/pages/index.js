@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import _ from 'lodash'
 import BlogListing from '../components/blog-listing'
-import SEO from '../components/seo'
+import { Head } from 'gatsby-theme-landing-page'
 
 const RootIndex = ({ data }) => {
   const posts = data.allContentfulBlogPost.nodes
@@ -27,7 +27,7 @@ const RootIndex = ({ data }) => {
 
   return (
     <>
-      <SEO />
+      <Head />
       <BlogListing allBlogPosts={allBlogPosts} />
     </>    
   )

@@ -4,18 +4,12 @@ import * as Components from "../sections";
 import Layout from "../components/layout";
 import Page from "../components/page";
 import DevDebug from "../components/dev-debug";
-import SEO from "../../../src/components/seo";
 
 export default function LandingPage(props) {
   const { sections } = props.data.page;
 
   return (
     <Layout {...props.data.page}>
-      <SEO
-        title={props.data.page.title}
-        description={props.data.page.description}
-        image={props.data.page.image}
-      />
       <Page>
         {sections.map((section) => {
           const Component = Components[section.component] || DevDebug;

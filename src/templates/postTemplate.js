@@ -11,7 +11,6 @@ import './blog-post.module.css'
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon, IonItem, IonLabel, IonNote } from '@ionic/react'
 import { arrowBack, arrowForward, shareSocialOutline, videocam } from 'ionicons/icons'
 import { RWebShare } from 'react-web-share'
-import SEO from '../components/seo'
 
 const PostTemplate = (props) => {
     const post = get(props, 'data.contentfulBlogPost')
@@ -52,11 +51,6 @@ const PostTemplate = (props) => {
 
     return (
         <Layout extraEndButtons={extraEndButtons}>
-            <SEO
-                title={post.title}
-                description={plainTextDescription}
-                image={post.image}
-            />
             <IonCard>
                 <IonCardHeader>
                     <IonCardTitle color={'primary'}>{post.title}</IonCardTitle>

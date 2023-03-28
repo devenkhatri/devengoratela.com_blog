@@ -3,7 +3,6 @@ import { Link, graphql } from 'gatsby'
 import get from 'lodash/get'
 import { readingTime } from 'reading-time-estimator'
 
-import Seo from '../components/seo'
 import Layout from '../components/layout'
 import Tags from '../components/tags'
 import * as styles from './blog-post.module.css'
