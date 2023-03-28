@@ -27,8 +27,7 @@ export default function Head({
 
   const metaDescription = description || site.siteMetadata.description
   const metaTitle = title || site.siteMetadata.title
-  const imageUrl = image ? `https:${image.file.url}` : site.siteMetadata.image;
-  
+  const imageUrl = image ? `https:${image.file.url}` : site.siteMetadata.image;  
 
   return (
     <Helmet

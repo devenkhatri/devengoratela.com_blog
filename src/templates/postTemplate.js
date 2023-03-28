@@ -50,7 +50,7 @@ const PostTemplate = (props) => {
     )
 
     return (
-        <Layout extraEndButtons={extraEndButtons}>
+        <Layout extraEndButtons={extraEndButtons} title={post.title} description={plainTextDescription}>
             <IonCard>
                 <IonCardHeader>
                     <IonCardTitle color={'primary'}>{post.title}</IonCardTitle>

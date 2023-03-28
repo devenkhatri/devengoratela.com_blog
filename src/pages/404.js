@@ -6,7 +6,7 @@ import { Heading } from 'gatsby-theme-landing-page';
 
 const NotFound = () => {
     return (
-        <Layout>
+        <Layout title="404: Page Not Found">
             <Heading center><h1>404: Page Not Found</h1>
                 <p>
                     <Link to="/">Check our latest articles on Homepage</Link>
