@@ -8,7 +8,7 @@ export default function Head({
   image = "",
   noIndex = false,
 }) {
-  const imageUrl = image ? `https:${image.file.url}` : "";
+  const imageUrl = image ? `https:${image.file.url}` : "/icons/icon-512x512.png";
   const robots = noIndex ? `noindex, nofollow` : `index`;
 
   const { site } = useStaticQuery(
