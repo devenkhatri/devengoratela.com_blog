@@ -32,7 +32,7 @@ export default function Layout(props) {
   return (
     <IonApp>
       <Helmet>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2576290690063012"
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7791622622856928"
           crossorigin="anonymous"></script>
       </Helmet>
       <Menu labels={props.allLabels} />
