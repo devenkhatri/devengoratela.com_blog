@@ -61,6 +61,70 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allContentfulBlogPost } }) => {
+              return allContentfulBlogPost.nodes.map(post => {
+                return Object.assign({}, {
+                  title: post.title,
+                  slug: post.slug,
+                  url: site.siteMetadata.siteUrl + post.slug,
+                  guid: site.siteMetadata.siteUrl + post.slug,
+                  type: 'post',
+                  bodyRichText: post.body?.raw,
+                  description: post.description?.description,
+                  date: post.publishDate,
+                  image: post.heroImage?.gatsbyImage,
+                  youtubeUrl: post.youtubeUrl,
+                  tags: post.tags,
+                })
+              })
+            },
+            query: `
+              {
+                allContentfulBlogPost(sort: {publishDate: DESC}) {
+                  nodes {
+                    title
+                    slug
+                    publishDate(formatString: "MMMM Do, YYYY")
+                    tags
+                    heroImage {
+                      gatsbyImage(
+                        layout: FULL_WIDTH
+                        placeholder: BLURRED
+                        width: 424
+                        height: 212
+                      )
+                    }
+                    description {
+                      description
+                    }
+                    youtubeUrl
+                  }
+                }  
+              }
+            `,
+            output: "/rss.xml",
+            title: "Your Site's RSS Feed",
+          },
+        ],
+      }
+    },
     `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -75,12 +139,12 @@ module.exports = {
         icon: `src/assets/favicon.png`,
       },
     },
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        precachePages: [`/`, `/post/*`],
-        globPatterns: ['**/src/assets/favicon*']
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-offline`,
+    //   options: {
+    //     precachePages: [`/`, `/post/*`],
+    //     globPatterns: ['**/src/assets/favicon*']
+    //   },
+    // },
   ],
 };
