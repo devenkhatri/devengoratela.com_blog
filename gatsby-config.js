@@ -82,7 +82,7 @@ module.exports = {
             serialize: ({ query: { site, allContentfulBlogPost } }) => {
               const { documentToHtmlString } =  require('@contentful/rich-text-html-renderer');
               return allContentfulBlogPost.nodes.map(post => {
-                const bodyHTML = (post.body?.raw && documentToHtmlString(post.body.raw)) + "<br/><br/><p><a href='' target='_blank'>View blog on Youtube</a></p>";
+                const bodyHTML = documentToHtmlString(post.body.raw) + "<br/><br/><p><a href='' target='_blank'>View blog on Youtube</a></p>";
                 return Object.assign({}, {
                   title: post.title,
                   slug: post.slug,
@@ -91,6 +91,7 @@ module.exports = {
                   description: post.description?.description,
                   custom_elements: [{ "content:encoded": bodyHTML }],
                   date: post.publishDate,
+                  category: "aws",
                 })
               })
             },
