@@ -80,9 +80,9 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allContentfulBlogPost } }) => {
-              const { renderRichText } =  require('gatsby-source-contentful/rich-text');
+              const { documentToHtmlString } =  require('@contentful/rich-text-html-renderer');
               return allContentfulBlogPost.nodes.map(post => {
-                const bodyHTML = (post.body?.raw && renderRichText(post.body)) + "<br/><br/><p><a href='' target='_blank'>View blog on Youtube</a></p>";
+                const bodyHTML = (post.body?.raw && documentToHtmlString(post.body)) + "<br/><br/><p><a href='' target='_blank'>View blog on Youtube</a></p>";
                 return Object.assign({}, {
                   title: post.title,
                   slug: post.slug,
