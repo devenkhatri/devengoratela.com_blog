@@ -82,7 +82,7 @@ module.exports = {
             serialize: ({ query: { site, allContentfulBlogPost } }) => {
               const { documentToHtmlString } =  require('@contentful/rich-text-html-renderer');
               return allContentfulBlogPost.nodes.map(post => {
-                const bodyHTML = documentToHtmlString(post.body.raw) + "<p>This is a Video Blog. <a href='"+post.youtubUrl+"' target='_blank'>Click here to view it on Youtube</a></p>";
+                const bodyHTML = post.description?.description + "<br/><br/><p>This is a Video Blog. <a href='"+post.youtubeUrl+"' target='_blank'>Click here to view it on Youtube</a></p>";
                 return Object.assign({}, {
                   title: post.title,
                   slug: post.slug,
