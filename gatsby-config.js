@@ -83,15 +83,10 @@ module.exports = {
                 return Object.assign({}, {
                   title: post.title,
                   slug: post.slug,
-                  url: site.siteMetadata.siteUrl + post.slug,
-                  guid: site.siteMetadata.siteUrl + post.slug,
-                  type: 'post',
-                  bodyRichText: post.body?.raw,
+                  url: site.siteMetadata.siteUrl + "/" + post.slug,
+                  guid: site.siteMetadata.siteUrl + "/" +post.slug,
                   description: post.description?.description,
                   date: post.publishDate,
-                  image: post.heroImage?.gatsbyImage,
-                  youtubeUrl: post.youtubeUrl,
-                  tags: post.tags,
                 })
               })
             },
@@ -101,26 +96,16 @@ module.exports = {
                   nodes {
                     title
                     slug
-                    publishDate(formatString: "MMMM Do, YYYY")
-                    tags
-                    heroImage {
-                      gatsbyImage(
-                        layout: FULL_WIDTH
-                        placeholder: BLURRED
-                        width: 424
-                        height: 212
-                      )
-                    }
+                    publishDate
                     description {
                       description
                     }
-                    youtubeUrl
                   }
                 }  
               }
             `,
             output: "/rss.xml",
-            title: "Your Site's RSS Feed",
+            title: "Deven Goratela's RSS Feed",
           },
         ],
       }
