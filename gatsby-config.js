@@ -1,3 +1,5 @@
+import { renderRichText } from 'gatsby-source-contentful/rich-text'
+
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
@@ -80,13 +82,14 @@ module.exports = {
           {
             serialize: ({ query: { site, allContentfulBlogPost } }) => {
               return allContentfulBlogPost.nodes.map(post => {
+                const bodyHTML = (post.body?.raw && renderRichText(post.body)) + "<br/><br/><p><a href='' target='_blank'>View blog on Youtube</a></p>";
                 return Object.assign({}, {
                   title: post.title,
                   slug: post.slug,
                   url: site.siteMetadata.siteUrl + "/" + post.slug,
                   guid: site.siteMetadata.siteUrl + "/" +post.slug,
                   description: post.description?.description,
-                  "content:encoded": post.description?.description + "<br/><br/><p><a href='' target='_blank'>Click to see the detailed Youtube Video</a></p>",
+                  custom_elements: [{ "content:encoded": bodyHTML }],
                   date: post.publishDate,
                 })
               })
@@ -101,6 +104,9 @@ module.exports = {
                     youtubeUrl
                     description {
                       description
+                    }
+                    body {
+                      raw        
                     }
                   }
                 }  
