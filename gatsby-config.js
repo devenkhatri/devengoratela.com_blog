@@ -86,6 +86,7 @@ module.exports = {
                   url: site.siteMetadata.siteUrl + "/" + post.slug,
                   guid: site.siteMetadata.siteUrl + "/" +post.slug,
                   description: post.description?.description,
+                  "content:encoded": post.description?.description + "<br/><br/><p><a href='' target='_blank'>Click to see the detailed Youtube Video</a></p>",
                   date: post.publishDate,
                 })
               })
@@ -97,6 +98,7 @@ module.exports = {
                     title
                     slug
                     publishDate
+                    youtubeUrl
                     description {
                       description
                     }
