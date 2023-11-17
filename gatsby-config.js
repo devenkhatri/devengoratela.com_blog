@@ -1,4 +1,3 @@
-import { renderRichText } from 'gatsby-source-contentful/rich-text'
 
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -81,6 +80,7 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allContentfulBlogPost } }) => {
+              const { renderRichText } =  require('gatsby-source-contentful/rich-text');
               return allContentfulBlogPost.nodes.map(post => {
                 const bodyHTML = (post.body?.raw && renderRichText(post.body)) + "<br/><br/><p><a href='' target='_blank'>View blog on Youtube</a></p>";
                 return Object.assign({}, {
